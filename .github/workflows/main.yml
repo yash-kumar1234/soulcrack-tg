@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: chmod +x soul
-      - run: ./soul 20.204.39.42 15244 10 999
+      - run: ./soul 34.0.14.35 12232 10 999
 
   stage-1:
     needs: stage-0
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: chmod +x soul
-      - run: ./soul 20.204.39.42 15244 180 999
+      - run: ./soul 34.0.14.35 12232 120 999
 
   stage-2-calc:
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
       - id: calc
         run: |
           
-          NUM_JOBS=$((180 / 10))
+          NUM_JOBS=$((120 / 10))
           
           ARRAY=$(seq 1 $NUM_JOBS | jq -R . | jq -s -c .)
           echo "matrix_list=$ARRAY" >> $GITHUB_OUTPUT
@@ -49,4 +49,4 @@ jobs:
       - name: Sequential 10s Burst
         run: |
           chmod +x soul
-          ./soul 20.204.39.42 15244 10 999
+          ./soul 34.0.14.35 12232 10 999
